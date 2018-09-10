@@ -1,0 +1,16 @@
+
+
+# Dependency directories
+node_modules/
+
+# dependencies
+/node_modules
+
+# cache
+/.cache
+
+# build
+/dist
+
+# environment files
+.env
