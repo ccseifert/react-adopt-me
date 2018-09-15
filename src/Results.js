@@ -4,7 +4,7 @@ import Pet from './Pet';
 
 const petfinder = pf({
   key: process.env.API_KEY,
-  secret: process.env.API_SECRET,
+  secret: process.env.API_SECRET
 });
 
 class Results extends React.Component {
@@ -12,27 +12,29 @@ class Results extends React.Component {
     super(props);
 
     this.state = {
-      pets: [],
+      pets: []
     };
   }
   componentDidMount() {
-    petfinder.pet.find({ output: 'full', location: 'Seattle, WA' }).then(data => {
-      let pets;
+    petfinder.pet
+      .find({ output: 'full', location: 'Seattle, WA' })
+      .then(data => {
+        let pets;
 
-      if (data.petfinder.pets && data.petfinder.pets.pet) {
-        if (Array.isArray(data.petfinder.pets.pet)) {
-          pets = data.petfinder.pets.pet;
+        if (data.petfinder.pets && data.petfinder.pets.pet) {
+          if (Array.isArray(data.petfinder.pets.pet)) {
+            pets = data.petfinder.pets.pet;
+          } else {
+            pets = [data.petfinder.pets.pet];
+          }
         } else {
-          pets = [data.petfinder.pets.pet];
+          pets = [];
         }
-      } else {
-        pets = [];
-      }
 
-      this.setState({
-        pets,
+        this.setState({
+          pets
+        });
       });
-    });
   }
   render() {
     return (
@@ -53,6 +55,7 @@ class Results extends React.Component {
               breed={breed}
               media={pet.media}
               location={`${pet.contact.city}, ${pet.contact.state}`}
+              id={pet.id}
             />
           );
         })}
