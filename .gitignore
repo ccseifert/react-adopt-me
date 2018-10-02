@@ -14,3 +14,4 @@ node_modules/
 
 # environment files
 .env
+\.DS_Store
